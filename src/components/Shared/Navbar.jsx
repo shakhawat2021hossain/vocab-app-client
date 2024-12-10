@@ -1,15 +1,23 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu } from "react-icons/ai";
-
-
-
-
+import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const { user, logOut } = useAuth()
+    // console.log(user);
 
-
+    const handleLogout = async() =>{
+        try{
+            await logOut()
+            toast.success("Sign out successfully")
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 
     return (
         <div className='w-full bg-white shadow-sm'>
@@ -35,7 +43,7 @@ const Navbar = () => {
                                         <img
                                             className='rounded-full'
                                             referrerPolicy='no-referrer'
-                                            src={"https://cdn-icons-png.flaticon.com/512/8847/8847419.png"}
+                                            src={user && user?.photoURL || "https://cdn-icons-png.flaticon.com/512/8847/8847419.png"}
                                             alt='profile'
                                             height='30'
                                             width='30'
@@ -52,6 +60,37 @@ const Navbar = () => {
                                         >
                                             Home
                                         </Link>
+                                        {user ? (
+                                            <>
+                                                <Link
+                                                    to='/dashboard'
+                                                    className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                >
+                                                    Dashboard
+                                                </Link>
+                                                <div
+                                                    onClick={handleLogout}
+                                                    className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                                >
+                                                    Logout
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Link
+                                                    to='/login'
+                                                    className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                >
+                                                    Login
+                                                </Link>
+                                                <Link
+                                                    to='/signup'
+                                                    className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                >
+                                                    Sign Up
+                                                </Link>
+                                            </>
+                                        )}
 
                                     </div>
                                 </div>
