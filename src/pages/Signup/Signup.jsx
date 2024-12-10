@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/Shared/SocialLogin";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const Signup = () => {
     const navigate = useNavigate()
@@ -10,15 +11,29 @@ const Signup = () => {
 
     const { createUser, updateUserProfile } = useAuth()
 
+    const imgUpload = async (image) => {
+        const formData = new FormData()
+        formData.append('image', image);
+        const { data } = await axios.post('https://api.imgbb.com/1/upload?key=37c60d712bf322e97597883e93903d85', formData)
+        const url = data.data.url
+        console.log(url);
+        return url
+    
+    }
+
     const handleSignup = async (e) => {
         e.preventDefault();
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const img = 'https://cdn-icons-png.flaticon.com/512/8847/8847419.png'
+        const image = e.target.image.files[0]
+
+        // const img = 'https://cdn-icons-png.flaticon.com/512/8847/8847419.png'
         // const user = { name, email, password }
         // console.log(user);
         try {
+            const img = await imgUpload(image)
+
             const result = await createUser(email, password)
             console.log(result);
 
@@ -52,7 +67,17 @@ const Signup = () => {
                             className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-600"
                         />
                     </div>
-                    <div>
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium text-gray-700">Upload Image</label>
+                        <input
+                            type="file"
+                            id="image"
+                            required
+                            className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-600 text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black"
+
+                        />
+                    </div>
+                    <div className="mt-4">
                         <label className="block text-sm font-medium text-gray-700">Email</label>
                         <input
                             type="email"
