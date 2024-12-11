@@ -1,33 +1,41 @@
 import React, { useState } from "react";
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
-
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const LessonDetails = () => {
+    const axiosPublic = useAxiosPublic();
+    const { id } = useParams();
 
-    const axiosPublic = useAxiosPublic()
-    const { id } = useParams()
-    // console.log(id);
-    const { data: lesson } = useQuery({
+    const { data: lesson, isLoading } = useQuery({
         queryKey: ["lesson"],
         queryFn: async () => {
-            const { data } = await axiosPublic.get(`/lesson/${id}`)
-            return data
-        }
-    })
+            const { data } = await axiosPublic.get(`/lesson/${id}`);
+            return data;
+        },
+    });
 
-    const vocab = lesson.vocabularies
+    const vocab = lesson?.vocabularies;
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleNext = () => {
         if (currentPage < vocab.length - 1) setCurrentPage(currentPage + 1);
     };
+
     const handlePrevious = () => {
         if (currentPage > 0) setCurrentPage(currentPage - 1);
     };
+
+    function pronounceWord(word) {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'ja-JP'; // Japanese
+        window.speechSynthesis.speak(utterance);
+    }
+
+    if (isLoading) return <LoadingSpinner />;
     return (
-        <div className="max-w-md mx-auto mt-10 p-5">
+        <div onClick={() => pronounceWord(vocab[currentPage].word)} className="max-w-md mx-auto mt-10 p-5 cursor-pointer">
             <div className="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
                     {vocab[currentPage].word} ({vocab[currentPage].pronunciation})
