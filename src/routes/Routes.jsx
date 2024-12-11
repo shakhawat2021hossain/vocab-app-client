@@ -9,6 +9,10 @@ import LessonDetails from "../pages/LessonDetails/LessonDetails";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard";
 import Statistics from "../pages/Dashboard/Statistics";
+import AddLesson from "../pages/Dashboard/AddLesson";
+import AddVocab from "../pages/Dashboard/AddVocab";
+import ManageUsers from "../pages/Dashboard/ManageUsers";
+import AllLesson from "../pages/Dashboard/AllLesson";
 
 export const router = createBrowserRouter([
     {
@@ -45,6 +49,22 @@ export const router = createBrowserRouter([
             {
                 index:true,
                 element: <Statistics/>
+            },
+            {
+                path: 'add-lesson',
+                element: <AddLesson/>
+            },
+            {
+                path: 'add-vocab/:id',
+                element: <AddVocab/>
+            },
+            {
+                path: 'users',
+                element: <ManageUsers/>
+            },
+            {
+                path: 'all-lesson',
+                element: <AllLesson/>
             },
         ]
     },

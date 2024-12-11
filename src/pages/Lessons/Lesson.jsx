@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Lesson = ({ lesson }) => {
+    console.log(lesson);
     
     return (
         <div

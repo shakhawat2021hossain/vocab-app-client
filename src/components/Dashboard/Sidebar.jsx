@@ -6,6 +6,8 @@ import useAuth from '../../hooks/useAuth'
 import MenuItem from './MenuItem'
 import { TfiStatsUp } from "react-icons/tfi";
 import { FaBars, FaBookReader, FaUsers } from 'react-icons/fa'
+import { BiSolidBookAdd } from "react-icons/bi";
+
 
 
 const Sidebar = () => {
@@ -57,8 +59,9 @@ const Sidebar = () => {
                     <div className='flex flex-col justify-between flex-1 mt-6'>
                         <nav>
                             <MenuItem label={"Statistics"} address={'/dashboard'} icon={TfiStatsUp} />
-                            <MenuItem label={"All Lessons"} address={'/all-lesson'} icon={FaBookReader} />
-                            <MenuItem label={"Manage Users"} address={'/users'} icon={FaUsers} />
+                            <MenuItem label={"All Lessons"} address={'/dashboard/all-lesson'} icon={FaBookReader} />
+                            <MenuItem label={"Add Lesson"} address={'/dashboard/add-lesson'} icon={BiSolidBookAdd} />
+                            <MenuItem label={"Manage Users"} address={'/dashboard/users'} icon={FaUsers} />
 
                         </nav>
                     </div>
