@@ -25,7 +25,13 @@ const Navbar = () => {
                 <div className='max-w-7xl mx-auto'>
                     <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
                         {/* Logo */}
-                        <p className='font-semibold text-2xl'>Learn</p>
+                        <div className='block cursor-pointer font-bold'>
+                            <Link to='/'>
+                                <div className="text-3xl font-extrabold tracking-widest text-blue-600 hover:scale-110 transition-transform duration-300">
+                                    ~日本~
+                                </div>
+                            </Link>
+                        </div>
 
                         {/* Dropdown Menu */}
                         <div className='relative flex'>

@@ -1,7 +1,7 @@
 import React from 'react';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import LessonRow from '../../components/Dashboard/LessonRow';
 
 const AllLesson = () => {
     const axiosPublic = useAxiosPublic()
@@ -23,26 +23,26 @@ const AllLesson = () => {
                                     <tr>
                                         <th
                                             scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm font-semibold'
                                         >
                                             NO
                                         </th>
                                         <th
                                             scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm font-semibold'
                                         >
                                             Title
                                         </th>
                                         <th
                                             scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm font-semibold'
                                         >
                                             Vocabularies
                                         </th>
 
                                         <th
                                             scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm font-semibold'
                                         >
                                             Action
                                         </th>
@@ -50,34 +50,7 @@ const AllLesson = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        lessons.map(lesson => <tr key={lesson?._id}>
-                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                <p className='text-gray-900 whitespace-no-wrap'>{lesson?.lessonNo}</p>
-                                            </td>
-                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                <p className='text-gray-900 whitespace-no-wrap'>{lesson?.lessonName}</p>
-                                            </td>
-                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                {lesson?.vocabularies.length}
-                                            </td>
-
-                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-2'>
-                                                <button className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
-                                                    <span
-                                                        aria-hidden='true'
-                                                        className='absolute inset-0 bg-green-200 opacity-50 rounded-full'
-                                                    ></span>
-                                                    <span className='relative'>Delete</span>
-                                                </button>
-                                                <Link to={`/dashboard/add-vocab/${lesson?._id}`} className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
-                                                    <span
-                                                        aria-hidden='true'
-                                                        className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
-                                                    ></span>
-                                                    <span className='relative'>Add Vocab</span>
-                                                </Link>
-                                            </td>
-                                        </tr>)
+                                        lessons.map(lesson => <LessonRow key={lesson?._id} lesson={lesson}/>)
                                     }
                                 </tbody>
                             </table>

@@ -1,18 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import LoadingSpinner from '../../components/Shared/LoadingSpinner'
-// import UserDataRow from '../../components/Dashboard/UserDataRow'
-import useAxiosPublic from '../../hooks/useAxiosPublic'
+import UserDataRow from '../../components/Dashboard/UserDataRow'
+import useAxiosSecure from '../../hooks/useAxiosSecure'
 
 const ManageUsers = () => {
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
-            const { data } = await axiosPublic.get('/users')
+            const { data } = await axiosSecure.get('/users')
             return data
         }
     })
-    console.log(users);
+    // console.log(users);
     if (isLoading) return <LoadingSpinner />
     return (
         <>
@@ -25,30 +25,30 @@ const ManageUsers = () => {
                                     <tr>
                                         <th
                                             scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm font-semibold'
                                         >
                                             Email
                                         </th>
                                         <th
                                             scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm font-semibold'
                                         >
                                             Role
                                         </th>
 
                                         <th
                                             scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm font-semibold'
                                         >
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
-                                {/* <tbody>
+                                <tbody>
                                     {
-                                        users.map(user => <UserDataRow key={user._id} user={user} />)
+                                        users.map(user => <UserDataRow key={user._id} user={user} refetch={refetch}/>)
                                     }
-                                </tbody> */}
+                                </tbody>
                             </table>
                         </div>
                     </div>

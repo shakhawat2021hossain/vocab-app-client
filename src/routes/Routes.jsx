@@ -13,6 +13,8 @@ import AddLesson from "../pages/Dashboard/AddLesson";
 import AddVocab from "../pages/Dashboard/AddVocab";
 import ManageUsers from "../pages/Dashboard/ManageUsers";
 import AllLesson from "../pages/Dashboard/AllLesson";
+import AdminRoute from "./AdminRoute";
+import Profile from "../pages/Dashboard/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -22,50 +24,56 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home/>
+                element: <Home />
             },
             {
                 path: '/lessons',
-                element: <Lessons/>
+                element: <Lessons />
             },
             {
                 path: '/lesson/:id',
-                element: <PrivateRoute><LessonDetails/></PrivateRoute>
+                element: <PrivateRoute><LessonDetails /></PrivateRoute>
             },
         ]
     },
     {
         path: '/signup',
-        element: <Signup/>
+        element: <Signup />
     },
     {
         path: '/login',
-        element: <Login/>
+        element: <Login />
     },
     {
         path: '/dashboard',
-        element: <Dashboard/>,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
-                index:true,
-                element: <Statistics/>
+                index: true,
+                element: <Profile/>
+            },
+            {
+                path: 'statistics',
+                element: <AdminRoute><Statistics /></AdminRoute>
             },
             {
                 path: 'add-lesson',
-                element: <AddLesson/>
+                element: <AdminRoute><AddLesson /></AdminRoute>
             },
             {
                 path: 'add-vocab/:id',
-                element: <AddVocab/>
+                element: <AdminRoute><AddVocab /></AdminRoute>
             },
             {
                 path: 'users',
-                element: <ManageUsers/>
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: 'all-lesson',
-                element: <AllLesson/>
+                element: <AdminRoute><AllLesson /></AdminRoute>
             },
+            
+            
         ]
     },
 ])

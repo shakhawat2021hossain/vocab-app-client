@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import UpdateUserModal from '../Modal/UpdateUserModal'
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
-const UserDataRow = ({ user }) => {
+import UpdateUserModal from './UpdateUserModal';
+const UserDataRow = ({ user, refetch }) => {
     const [isOpen, setIsOpen] = useState(false);
     const axiosSecure = useAxiosSecure()
 
@@ -19,10 +19,8 @@ const UserDataRow = ({ user }) => {
     })
 
     const modalHandler = async (selected) => {
-        // console.log("user role updated", selected);
         const user = {
-            role: selected,
-            status: 'verified'
+            role: selected
         }
         try {
             const data = await mutateAsync(user)
@@ -41,18 +39,6 @@ const UserDataRow = ({ user }) => {
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                 <p className='text-gray-900 whitespace-no-wrap'>{user?.role}</p>
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                {user?.status ? (
-                    <p
-                        className={`${user.status === 'Verified' ? 'text-green-500' : 'text-yellow-500'
-                            } whitespace-no-wrap`}
-                    >
-                        {user.status}
-                    </p>
-                ) : (
-                    <p className='text-red-500 whitespace-no-wrap'>Unavailable</p>
-                )}
-            </td>
 
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                 <button onClick={() => setIsOpen(true)} className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
@@ -63,11 +49,10 @@ const UserDataRow = ({ user }) => {
                     <span className='relative'>Update Role</span>
                 </button>
                 {/* Update User Modal */}
-                {/* <UpdateUserModal setIsOpen={setIsOpen} isOpen={isOpen} user={user} modalHandler={modalHandler} /> */}
+                <UpdateUserModal setIsOpen={setIsOpen} isOpen={isOpen} user={user} modalHandler={modalHandler} />
             </td>
         </tr>
     )
 }
-
 
 export default UserDataRow

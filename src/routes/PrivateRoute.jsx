@@ -7,7 +7,7 @@ const PrivateRoute = ({children}) => {
     const location = useLocation()
     const {user, loading} = useAuth()
 
-    if(loading) <LoadingSpinner/>
+    if(loading) return <LoadingSpinner/>
     if(user) return children
     return <Navigate to={'/login'} state={location.pathname} replace='true' />
    
