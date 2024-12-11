@@ -9,12 +9,12 @@ const Navbar = () => {
     const { user, logOut } = useAuth()
     // console.log(user);
 
-    const handleLogout = async() =>{
-        try{
+    const handleLogout = async () => {
+        try {
             await logOut()
             toast.success("Sign out successfully")
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
@@ -26,11 +26,19 @@ const Navbar = () => {
                     <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
                         {/* Logo */}
                         <p className='font-semibold text-2xl'>Learn</p>
+
                         {/* Dropdown Menu */}
-                        <div className='relative'>
+                        <div className='relative flex'>
+                            <ul className='menu menu-horizontal px-1 flex flex-row items-center gap-4 mx-6'>
+                                <li>
+                                    <Link to='/'>Home</Link>
+                                </li>
+                                <li>
+                                    <Link to='/lessons'>Lessons</Link>
+                                </li>
+                            </ul>
+
                             <div className='flex flex-row items-center gap-3'>
-
-
 
                                 {/* Dropdown btn */}
                                 <div

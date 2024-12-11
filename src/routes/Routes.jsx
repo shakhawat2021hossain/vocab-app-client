@@ -4,6 +4,8 @@ import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home/Home";
 import Signup from "../pages/Signup/Signup";
 import Login from "../pages/Login/Login";
+import Lessons from "../pages/Lessons/Lessons";
+import LessonDetails from "../pages/LessonDetails/LessonDetails";
 
 export const router = createBrowserRouter([
     {
@@ -13,8 +15,16 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
-            }
+                element: <Home/>
+            },
+            {
+                path: '/lessons',
+                element: <Lessons/>
+            },
+            {
+                path: '/lesson/:id',
+                element: <LessonDetails/>
+            },
         ]
     },
     {
