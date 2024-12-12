@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import Confetti from "react-confetti";
+import { RxSpeakerLoud } from "react-icons/rx";
+
 
 const LessonDetails = () => {
     const axiosPublic = useAxiosPublic();
@@ -56,10 +58,15 @@ const LessonDetails = () => {
             {/* Vocabulary Card */}
             {vocab.length > 0 && !isComplete && (
                 <div className="cursor-pointer">
-                    <div onClick={() => pronounceWord(vocab[currentPage].word)} className="p-6 bg-white rounded-lg shadow-lg">
-                        <h2 className="text-2xl font-bold text-gray-800">
-                            {vocab[currentPage].word} ({vocab[currentPage].pronunciation})
-                        </h2>
+                    <div className="p-6 bg-white rounded-lg shadow-lg">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-2xl font-bold text-gray-800">
+                                {vocab[currentPage].word} ({vocab[currentPage].pronunciation})
+                            </h2>
+                            <button onClick={() => pronounceWord(vocab[currentPage].word)}>
+                                <RxSpeakerLoud />
+                            </button>
+                        </div>
                         <p className="text-gray-600">
                             <strong>Meaning:</strong> {vocab[currentPage].meaning}
                         </p>
