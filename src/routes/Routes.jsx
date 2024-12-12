@@ -15,6 +15,8 @@ import ManageUsers from "../pages/Dashboard/ManageUsers";
 import AllLesson from "../pages/Dashboard/AllLesson";
 import AdminRoute from "./AdminRoute";
 import Profile from "../pages/Dashboard/Profile";
+import AllVocab from "../pages/Dashboard/AllVocab";
+import UpdateVocab from "../pages/Dashboard/UpdateVocab";
 
 export const router = createBrowserRouter([
     {
@@ -71,6 +73,14 @@ export const router = createBrowserRouter([
             {
                 path: 'all-lesson',
                 element: <AdminRoute><AllLesson /></AdminRoute>
+            },
+            {
+                path: 'all-vocab',
+                element: <AdminRoute><AllVocab /></AdminRoute>
+            },
+            {
+                path: 'update-vocab/:id/:pronunciation',
+                element: <AdminRoute><UpdateVocab /></AdminRoute>
             },
             
             
