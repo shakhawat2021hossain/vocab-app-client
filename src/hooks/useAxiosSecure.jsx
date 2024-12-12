@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import useAuth from './useAuth';
+import useLogout from './useLogOut';
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://vocab-app-server.vercel.app',
     withCredentials: true
 })
 const useAxiosSecure = () => {
-    const { logOut } = useAuth()
+    const { logOut } = useLogout()
     const navigate = useNavigate()
     
 

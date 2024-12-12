@@ -5,7 +5,7 @@ import LessonRow from '../../components/Dashboard/LessonRow';
 
 const AllLesson = () => {
     const axiosPublic = useAxiosPublic()
-    const { data: lessons = [] } = useQuery({
+    const { data: lessons = [], refetch } = useQuery({
         queryKey: ["lessons"],
         queryFn: async () => {
             const { data } = await axiosPublic.get('/lessons')
@@ -50,7 +50,7 @@ const AllLesson = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        lessons.map(lesson => <LessonRow key={lesson?._id} lesson={lesson}/>)
+                                        lessons.map(lesson => <LessonRow key={lesson?._id} lesson={lesson} refetch={refetch}/>)
                                     }
                                 </tbody>
                             </table>

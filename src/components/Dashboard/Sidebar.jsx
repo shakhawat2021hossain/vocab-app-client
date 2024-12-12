@@ -5,15 +5,16 @@ import { Link } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 import MenuItem from './MenuItem'
 import { TfiStatsUp } from "react-icons/tfi";
-import { FaBars, FaBookReader, FaUsers } from 'react-icons/fa'
+import { FaBars, FaBookReader, FaHome, FaUsers } from 'react-icons/fa'
 import { BiSolidBookAdd } from "react-icons/bi";
 import useRole from '../../hooks/useRole'
 import LoadingSpinner from '../Shared/LoadingSpinner'
+import useLogout from '../../hooks/useLogOut'
 
 
 
 const Sidebar = () => {
-    const { logOut } = useAuth()
+    const { logOut } = useLogout()
     const [isActive, setActive] = useState(false)
     const [role, isLoading] = useRole()
     const { user, loading } = useAuth()
@@ -84,6 +85,8 @@ const Sidebar = () => {
 
                 <div>
                     <hr />
+                    <MenuItem address={'/'} label={'Home'} icon={FaHome} />
+
                     <button
                         onClick={logOut}
                         className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'

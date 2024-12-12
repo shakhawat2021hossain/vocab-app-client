@@ -1,15 +1,13 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import SocialLogin from "../../components/Shared/SocialLogin";
-import useAuth from "../../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Signup = () => {
     const navigate = useNavigate()
-    const location = useLocation()
-    const from = location?.state
-
-    const { createUser, updateUserProfile } = useAuth()
+    
+    const axiosPublic = useAxiosPublic()
 
     const imgUpload = async (image) => {
         const formData = new FormData()
@@ -21,6 +19,13 @@ const Signup = () => {
     
     }
 
+    const {mutateAsync} = useMutation({
+        mutationFn: async(user) =>{
+            const {data} = await axiosPublic.post('/register', user)
+            return data
+        },
+    })
+
     const handleSignup = async (e) => {
         e.preventDefault();
         const name = e.target.name.value;
@@ -28,26 +33,21 @@ const Signup = () => {
         const password = e.target.password.value;
         const image = e.target.image.files[0]
 
-        // const img = 'https://cdn-icons-png.flaticon.com/512/8847/8847419.png'
-        // const user = { name, email, password }
-        // console.log(user);
         try {
             const img = await imgUpload(image)
+      
+            const user = {name, email, img, password, role: "guest"}
+            await mutateAsync(user)
+            
 
-            const result = await createUser(email, password)
-            console.log(result);
-
-            await updateUserProfile(name, img)
-
-            navigate(from || '/')
+            navigate('/login')
             toast.success("successfully register")
+            toast.success("Please Login")
 
         }
         catch (err) {
             console.log(err);
         }
-
-
     };
 
     return (
@@ -107,18 +107,7 @@ const Signup = () => {
                     </div>
                 </form>
 
-                {/* Divider */}
-                <div className="flex items-center justify-between my-4">
-                    <span className="w-1/5 border-b border-gray-300 lg:w-1/4"></span>
-                    <p className="text-xs text-center text-gray-500 uppercase">OR</p>
-                    <span className="w-1/5 border-b border-gray-300 lg:w-1/4"></span>
-                </div>
-
-                <SocialLogin />
-
                 <p className="pt-6 text-center">Already have an account? <Link className="underline text-blue-600" to="/login">Login</Link></p>
-
-
             </div>
         </div>
     );

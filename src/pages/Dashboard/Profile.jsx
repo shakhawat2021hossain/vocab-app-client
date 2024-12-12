@@ -21,23 +21,23 @@ const Profile = () => {
                     <a href='#' className='relative block'>
                         <img
                             alt='profile'
-                            src={user?.photoURL}
+                            src={user?.img}
                             className='mx-auto object-cover rounded-full h-24 w-24  border-2 border-white '
                         />
                     </a>
 
                     <p className='p-2 px-4 text-xs text-white bg-pink-500 rounded-full'>
-                        {role.split('')[0].toUpperCase() + role.slice(1)}
+                        {role || "Undefined"}
                     </p>
                     <p className='mt-2 text-xl font-medium text-gray-800 '>
-                        User Id: {user?.uid}
+                        User Id: {user?._id}
                     </p>
                     <div className='w-full p-2 mt-4 rounded-lg'>
                         <div className='flex flex-wrap items-center justify-between text-sm text-gray-600 '>
                             <p className='flex flex-col'>
                                 Name
                                 <span className='font-bold text-black '>
-                                    {user?.displayName}
+                                    {user?.name}
                                 </span>
                             </p>
                             <p className='flex flex-col'>

@@ -1,27 +1,34 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import SocialLogin from "../../components/Shared/SocialLogin";
-import useAuth from "../../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
     const navigate = useNavigate()
-    const location = useLocation()
-    const from = location?.state
+    const axiosPublic = useAxiosPublic()
 
-    const {login} = useAuth()
+    const { mutateAsync } = useMutation({
+        mutationFn: async (user) => {
+            const { data } = await axiosPublic.post('/login', user)
+            return data
+        },
+    })
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        try{
-            const result = await login(email, password)
-            console.log(result);
+        try {
+            const user = { email, password }
+            const res = await mutateAsync(user)
+            console.log(res);
+
             toast.success("successfully logged in")
-            navigate(from || '/')
+            navigate('/')
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
 
@@ -64,14 +71,7 @@ const Login = () => {
                     </div>
                 </form>
 
-                {/* Divider */}
-                <div className="flex items-center justify-between my-4">
-                    <span className="w-1/5 border-b border-gray-300 lg:w-1/4"></span>
-                    <p className="text-xs text-center text-gray-500 uppercase">OR</p>
-                    <span className="w-1/5 border-b border-gray-300 lg:w-1/4"></span>
-                </div>
-
-                <SocialLogin />
+                
 
                 <p className="pt-6 text-center">Don't have an account? <Link className="underline text-blue-600" to="/signup">register</Link></p>
 

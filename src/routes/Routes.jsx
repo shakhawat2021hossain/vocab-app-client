@@ -17,24 +17,29 @@ import AdminRoute from "./AdminRoute";
 import Profile from "../pages/Dashboard/Profile";
 import AllVocab from "../pages/Dashboard/AllVocab";
 import UpdateVocab from "../pages/Dashboard/UpdateVocab";
+import Tutorials from "../pages/Tutorials/Tutorials";
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main />,
+        element: <PrivateRoute><Main /></PrivateRoute>,
         errorElement: <ErrorPage />,
         children: [
             {
-                path: '/',
-                element: <Home />
-            },
-            {
-                path: '/lessons',
+                index: true,
                 element: <Lessons />
             },
+            // {
+            //     path: '/lessons',
+            //     element: <Lessons />
+            // },
             {
                 path: '/lesson/:id',
                 element: <PrivateRoute><LessonDetails /></PrivateRoute>
+            },
+            {
+                path: '/tutorials',
+                element: <Tutorials />
             },
         ]
     },
@@ -52,7 +57,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Profile/>
+                element: <Profile />
             },
             {
                 path: 'statistics',
@@ -82,8 +87,8 @@ export const router = createBrowserRouter([
                 path: 'update-vocab/:id/:pronunciation',
                 element: <AdminRoute><UpdateVocab /></AdminRoute>
             },
-            
-            
+
+
         ]
     },
 ])

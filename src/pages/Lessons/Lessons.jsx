@@ -12,11 +12,12 @@ const Lessons = () => {
             return data
         }
     })
-    console.log(lessons);
+    
+
 
     
     return (
-        <div className='py-6 bg-white dark:bg-gray-900'>
+        <div className='py-6 bg-white'>
             <h1 className='text-center text-3xl my-3 font-bold'>Lessons</h1>
             <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 {lessons.map((lesson) => (

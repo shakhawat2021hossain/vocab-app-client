@@ -2,17 +2,17 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu } from "react-icons/ai";
 import useAuth from '../../hooks/useAuth';
-import toast from 'react-hot-toast';
+import useLogout from '../../hooks/useLogOut';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const { user, logOut } = useAuth()
+    const { user } = useAuth()
     // console.log(user);
+    const {logOut} = useLogout()
 
     const handleLogout = async () => {
         try {
             await logOut()
-            toast.success("Sign out successfully")
         }
         catch (err) {
             console.log(err);
@@ -37,10 +37,10 @@ const Navbar = () => {
                         <div className='relative flex'>
                             <ul className='menu menu-horizontal px-1 flex flex-row items-center gap-4 mx-6'>
                                 <li>
-                                    <Link to='/'>Home</Link>
+                                    <Link to='/'>Lessons</Link>
                                 </li>
                                 <li>
-                                    <Link to='/lessons'>Lessons</Link>
+                                    <Link to='/tutorials'>Tutorials</Link>
                                 </li>
                             </ul>
 
@@ -57,7 +57,7 @@ const Navbar = () => {
                                         <img
                                             className='rounded-full'
                                             referrerPolicy='no-referrer'
-                                            src={user && user?.photoURL || "https://cdn-icons-png.flaticon.com/512/8847/8847419.png"}
+                                            src={user && user?.img || "https://cdn-icons-png.flaticon.com/512/8847/8847419.png"}
                                             alt='profile'
                                             height='30'
                                             width='30'
@@ -68,12 +68,6 @@ const Navbar = () => {
                             {isOpen && (
                                 <div className='absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm'>
                                     <div className='flex flex-col cursor-pointer'>
-                                        <Link
-                                            to='/'
-                                            className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                                        >
-                                            Home
-                                        </Link>
                                         {user ? (
                                             <>
                                                 <Link
