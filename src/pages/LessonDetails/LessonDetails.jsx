@@ -56,14 +56,14 @@ const LessonDetails = () => {
             {/* Vocabulary Card */}
             {vocab.length > 0 && !isComplete && (
                 <div className="cursor-pointer">
-                    <div onClick={() => pronounceWord(vocab[currentPage].word)} className="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                    <div onClick={() => pronounceWord(vocab[currentPage].word)} className="p-6 bg-white rounded-lg shadow-lg">
+                        <h2 className="text-2xl font-bold text-gray-800">
                             {vocab[currentPage].word} ({vocab[currentPage].pronunciation})
                         </h2>
-                        <p className="text-gray-600 dark:text-gray-300">
+                        <p className="text-gray-600">
                             <strong>Meaning:</strong> {vocab[currentPage].meaning}
                         </p>
-                        <p className="mt-2 text-gray-600 dark:text-gray-300">
+                        <p className="mt-2 text-gray-600">
                             <strong>When to Say:</strong> {vocab[currentPage].whenToSay}
                         </p>
                     </div>

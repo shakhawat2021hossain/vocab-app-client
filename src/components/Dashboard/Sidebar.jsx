@@ -68,7 +68,7 @@ const Sidebar = () => {
 
                             {
                                 role === 'admin' && <>
-                                    <MenuItem label={"Statistics"} address={'/dashboard/statistics'} icon={TfiStatsUp} />
+                                    {/* <MenuItem label={"Statistics"} address={'/dashboard/statistics'} icon={TfiStatsUp} /> */}
                                     <MenuItem label={"All Lessons"} address={'/dashboard/all-lesson'} icon={FaBookReader} />
                                     <MenuItem label={"Vocabularies"} address={'/dashboard/all-vocab'} icon={FaBookReader} />
                                     <MenuItem label={"Add Lesson"} address={'/dashboard/add-lesson'} icon={BiSolidBookAdd} />

@@ -59,10 +59,10 @@ export const router = createBrowserRouter([
                 index: true,
                 element: <Profile />
             },
-            {
-                path: 'statistics',
-                element: <AdminRoute><Statistics /></AdminRoute>
-            },
+            // {
+            //     path: 'statistics',
+            //     element: <AdminRoute><Statistics /></AdminRoute>
+            // },
             {
                 path: 'add-lesson',
                 element: <AdminRoute><AddLesson /></AdminRoute>
