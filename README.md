@@ -2,6 +2,8 @@
 
 This is the frontend of the **Japanese Vocabulary Learning Application**. The application helps users expand their Japanese vocabulary and improve communication skills by providing lessons and vocabulary sets. The project is built using React.js and other modern web technologies.
 
+This includes the live link: [https://vocab-app-1e62c.web.app/](https://vocab-app-1e62c.web.app/).
+
 ## Tech Stack
 - **React**: A JavaScript library for building user interfaces.
 - **React Router DOM**: For handling route navigation.
