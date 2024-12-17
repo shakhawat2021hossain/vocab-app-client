@@ -9,7 +9,7 @@ This includes the live link: [https://vocab-app-1e62c.web.app/](https://vocab-ap
 - **React Router DOM**: For handling route navigation.
 - **React Query**: To fetch and manage data.
 - **Axios**: For making API requests.
-- **Firebase**: For user authentication.
+- **Authentication**: Custom Authentication System.
 - **React Spinners**: For loading animations.
 - **React Icons**: For icons.
 - **Headless UI**: For accessible UI components.
