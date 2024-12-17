@@ -22,6 +22,19 @@ This includes the live link: [https://vocab-app-1e62c.web.app/](https://vocab-ap
 - **YouTube Tutorials**: Embedded videos for additional learning.
 - **Admin Role**: Admin can manage users, lessons, and vocabulary.
 
+## Admin Credentials
+To access the admin features, use the following credentials:
+
+- **Email:**
+   ```sh
+   admin@learn.com
+    ```
+- **Password:**
+   ```sh
+   123456
+    ```
+
+
 ## Installation
 
 ### 1. Clone the repository
