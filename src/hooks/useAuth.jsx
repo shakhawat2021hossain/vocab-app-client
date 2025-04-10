@@ -1,15 +1,8 @@
-import useAxiosPublic from './useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
+import { useContext } from 'react';
+import { AuthContext } from '../provider/AuthProvider';
 
 const useAuth = () => {
-    const axiosPublic = useAxiosPublic()
-    const { data: user, isLoading: loading } = useQuery({
-        queryKey: ["user"],
-        queryFn: async () => {
-            const { data } = await axiosPublic.get('/protected', { withCredentials: true });
-            return data;
-        }
-    })
-    return { user, loading };
+    const auth = useContext(AuthContext)
+    return auth;
 };
 export default useAuth;

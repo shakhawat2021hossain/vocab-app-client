@@ -9,9 +9,19 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
     const { logOut } = useLogout()
     const navigate = useNavigate()
-    
 
-    //response interceptor
+    // req interceptor
+    axiosSecure.interceptors.request.use(
+        (config) => {
+            // Add any custom headers if needed (no need for token if stored in cookies)
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
+    );
+
+    // response interceptor
     axiosSecure.interceptors.response.use(
         (res) => {
             return res

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { AiOutlineMenu } from "react-icons/ai";
 import useAuth from '../../hooks/useAuth';
 import useLogout from '../../hooks/useLogOut';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -36,6 +37,9 @@ const Navbar = () => {
                         {/* Dropdown Menu */}
                         <div className='relative flex'>
                             <ul className='menu menu-horizontal px-1 flex flex-row items-center gap-4 mx-6'>
+                                <li>
+                                    <ThemeToggle></ThemeToggle>
+                                </li>
                                 <li>
                                     <Link to='/'>Lessons</Link>
                                 </li>

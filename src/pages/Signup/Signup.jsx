@@ -6,7 +6,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Signup = () => {
     const navigate = useNavigate()
-    
+
     const axiosPublic = useAxiosPublic()
 
     const imgUpload = async (image) => {
@@ -16,12 +16,12 @@ const Signup = () => {
         const url = data.data.url
         // console.log(url);
         return url
-    
+
     }
 
-    const {mutateAsync} = useMutation({
-        mutationFn: async(user) =>{
-            const {data} = await axiosPublic.post('/register', user)
+    const { mutateAsync } = useMutation({
+        mutationFn: async (user) => {
+            const { data } = await axiosPublic.post('/register', user)
             return data
         },
     })
@@ -35,10 +35,10 @@ const Signup = () => {
 
         try {
             const img = await imgUpload(image)
-      
-            const user = {name, email, img, password, role: "guest"}
+
+            const user = { name, email, img, password, role: "guest" }
             await mutateAsync(user)
-            
+
 
             navigate('/login')
             toast.success("successfully register")
@@ -46,7 +46,10 @@ const Signup = () => {
 
         }
         catch (err) {
-            console.log(err);
+            console.log(err.response);
+            if (err?.response?.status === 400) {
+                toast.error(err?.response?.data?.message)
+            }
         }
     };
 

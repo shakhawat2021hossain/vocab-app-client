@@ -17,7 +17,7 @@ const Lessons = () => {
 
     
     return (
-        <div className='py-6 bg-white'>
+        <div className='py-6 bg-white my-8 rounded-lg'>
             <h1 className='text-center text-3xl my-3 font-bold'>Lessons</h1>
             <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 {lessons.map((lesson) => (
