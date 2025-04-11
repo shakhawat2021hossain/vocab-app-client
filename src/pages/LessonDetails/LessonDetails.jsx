@@ -1,30 +1,38 @@
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useParams, useNavigate } from "react-router-dom";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useParams, useNavigate, data } from "react-router-dom";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import Confetti from "react-confetti";
 import { RxSpeakerLoud } from "react-icons/rx";
+import { PiBookmarkSimple } from "react-icons/pi";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+
 
 
 const LessonDetails = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+
     const { id } = useParams();
     const navigate = useNavigate();
 
     const { data: lesson, isLoading } = useQuery({
         queryKey: ["lesson", id],
         queryFn: async () => {
-            const { data } = await axiosPublic.get(`/lesson/${id}`);
+            const { data } = await axiosSecure.get(`/lesson/${id}`);
             return data;
         },
     });
-
-    const vocab = lesson?.vocabularies || [];
+    
     const [currentPage, setCurrentPage] = useState(0);
     const [isComplete, setIsComplete] = useState(false);
     const [showConfetti, setShowConfetti] = useState(false);
+    const [bookmarkWord, setBookmarkWord] = useState(false);
+    
+    const vocab = lesson?.vocabularies || [];
+    // console.log(vocab);
 
+    // pagination
     const handleNext = () => {
         if (currentPage < vocab.length - 1) setCurrentPage(currentPage + 1);
     };
@@ -33,6 +41,7 @@ const LessonDetails = () => {
         if (currentPage > 0) setCurrentPage(currentPage - 1);
     };
 
+    // completion
     const handleComplete = () => {
         setShowConfetti(true);
         setIsComplete(true);
@@ -43,10 +52,29 @@ const LessonDetails = () => {
         }, 5000);
     };
 
+
+    // pronounce word
     function pronounceWord(word) {
         const utterance = new SpeechSynthesisUtterance(word);
         utterance.lang = "ja-JP"; // Japanese
         window.speechSynthesis.speak(utterance);
+    }
+
+    // bookmark
+    const {mutateAsync} = useMutation({
+        mutationFn: async (word) =>{
+           const {data} = await axiosSecure.post(`/bookmark/${id}`, word)
+           return data
+        },
+        onSuccess: (data) =>{
+            console.log(data);
+            toast.success(data?.message || "Bookmarked Successfully")
+        }
+    })
+    const bookmark = async () =>{
+        const word = vocab[currentPage]
+        await mutateAsync(word)
+         
     }
 
     if (isLoading) return <LoadingSpinner />;
@@ -57,15 +85,21 @@ const LessonDetails = () => {
 
             {/* Vocabulary Card */}
             {vocab.length > 0 && !isComplete && (
-                <div className="cursor-pointer">
+                <div className="">
                     <div className="p-6 bg-white rounded-lg shadow-lg">
                         <div className="flex items-center justify-between">
                             <h2 className="text-2xl font-bold text-gray-800">
                                 {vocab[currentPage].word} ({vocab[currentPage].pronunciation})
                             </h2>
-                            <button onClick={() => pronounceWord(vocab[currentPage].word)}>
-                                <RxSpeakerLoud />
-                            </button>
+                            <div className="flex gap-4">
+                                <button onClick={bookmark}>
+                                    <PiBookmarkSimple size={20}/>
+                                </button>
+                                <button onClick={() => pronounceWord(vocab[currentPage].word)}>
+                                    <RxSpeakerLoud  size={20}/>
+                                </button>
+
+                            </div>
                         </div>
                         <p className="text-gray-600">
                             <strong>Meaning:</strong> {vocab[currentPage].meaning}

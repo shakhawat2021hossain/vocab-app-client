@@ -18,6 +18,7 @@ import Profile from "../pages/Dashboard/Profile";
 import AllVocab from "../pages/Dashboard/AllVocab";
 import UpdateVocab from "../pages/Dashboard/UpdateVocab";
 import Tutorials from "../pages/Tutorials/Tutorials";
+import Bookmark from "../pages/Bookmark/Bookmark";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
             {
                 path: '/tutorials',
                 element: <Tutorials />
+            },
+            {
+                path: '/bookmark',
+                element: <Bookmark />
             },
         ]
     },

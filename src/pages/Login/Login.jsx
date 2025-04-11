@@ -1,17 +1,34 @@
-import { Link, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { ImSpinner9 } from "react-icons/im";
+import PassInput from "../../components/Shared/PassInput";
+
 
 const Login = () => {
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
 
-    const { mutateAsync } = useMutation({
+
+    const { mutateAsync, isPending } = useMutation({
         mutationFn: async (user) => {
             const { data } = await axiosPublic.post('/login', user)
             return data
         },
+        onSuccess: (data) => {
+            toast.success("Logged in Succesfull");
+            navigate('/')
+        },
+        onError: (err) => {
+            // console.log(err);
+            if (err?.response?.status === 400) {
+                toast.error(err?.response?.data?.message)
+            }
+            else{
+                toast.error("something went wrong")
+            }
+        }
     })
 
 
@@ -20,22 +37,8 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        try {
-            const user = { email, password }
-            const res = await mutateAsync(user)
-            console.log(res);
-
-            toast.success("successfully logged in")
-            navigate('/')
-        }
-        catch (err) {
-            console.log(err);
-            if(err?.response?.status === 400){
-                toast.error(err?.response?.data?.message)
-            }
-        }
-
-
+        const user = { email, password }
+        await mutateAsync(user)
     };
 
     return (
@@ -49,6 +52,7 @@ const Login = () => {
                         <input
                             type="email"
                             id="email"
+                            name="email"
                             placeholder="you@example.com"
                             required
                             className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-600"
@@ -56,25 +60,21 @@ const Login = () => {
                     </div>
                     <div className="mt-4">
                         <label className="block text-sm font-medium text-gray-700">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="******"
-                            required
-                            className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-600"
-                        />
+                        <PassInput />
+
                     </div>
                     <div className="mt-6">
                         <button
                             type="submit"
-                            className="w-full px-4 py-2 text-white bg-gray-900 rounded-md hover:bg-gray-700"
+                            disabled={isPending}
+                            className="w-full px-4 py-2 text-white bg-gray-900 rounded-md hover:bg-gray-700 flex items-center justify-center"
                         >
-                            Login
+                            {isPending ? <ImSpinner9 className="animate-spin" /> : "Login"}
                         </button>
                     </div>
                 </form>
 
-                
+
 
                 <p className="pt-6 text-center">Don't have an account? <Link className="underline text-blue-600" to="/signup">register</Link></p>
 

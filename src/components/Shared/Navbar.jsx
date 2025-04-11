@@ -4,12 +4,13 @@ import { AiOutlineMenu } from "react-icons/ai";
 import useAuth from '../../hooks/useAuth';
 import useLogout from '../../hooks/useLogOut';
 import ThemeToggle from './ThemeToggle';
+import { BiBookmark } from 'react-icons/bi';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const { user } = useAuth()
     // console.log(user);
-    const {logOut} = useLogout()
+    const { logOut } = useLogout()
 
     const handleLogout = async () => {
         try {
@@ -36,15 +37,18 @@ const Navbar = () => {
 
                         {/* Dropdown Menu */}
                         <div className='relative flex'>
-                            <ul className='menu menu-horizontal px-1 flex flex-row items-center gap-4 mx-6'>
+                            <ul className='menu menu-horizontal px-1 font-semibold flex flex-row items-center gap-3 mx-6'>
                                 <li>
-                                    <ThemeToggle></ThemeToggle>
+                                    <ThemeToggle size={20}></ThemeToggle>
                                 </li>
                                 <li>
                                     <Link to='/'>Lessons</Link>
                                 </li>
                                 <li>
                                     <Link to='/tutorials'>Tutorials</Link>
+                                </li>
+                                <li>
+                                    <Link to='/bookmark'><BiBookmark size={24}/></Link>
                                 </li>
                             </ul>
 

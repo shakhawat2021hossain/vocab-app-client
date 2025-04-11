@@ -8,7 +8,8 @@ const AuthProvider = ({children}) => {
     const { data: user, isLoading: loading } = useQuery({
         queryKey: ["user"],
         queryFn: async () => {
-            const { data } = await axiosPublic.get('/protected', { withCredentials: true });
+            const { data } = await axiosPublic.get('/protected');
+            // console.log(data);
             return data;
         }
     })

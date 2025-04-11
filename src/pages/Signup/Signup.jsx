@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import PassInput from "../../components/Shared/PassInput";
 
 const Signup = () => {
     const navigate = useNavigate()
@@ -92,13 +93,7 @@ const Signup = () => {
                     </div>
                     <div className="mt-4">
                         <label className="block text-sm font-medium text-gray-700">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="******"
-                            required
-                            className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-600"
-                        />
+                        <PassInput/>
                     </div>
                     <div className="mt-6">
                         <button
