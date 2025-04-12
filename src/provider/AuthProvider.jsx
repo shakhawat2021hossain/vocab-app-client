@@ -1,19 +1,31 @@
-import React, { createContext } from 'react';
-import useAxiosPublic from '../hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
+import { createContext, useState, useEffect } from 'react';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+
 
 export const AuthContext = createContext(null)
-const AuthProvider = ({children}) => {
-    const axiosPublic = useAxiosPublic()
-    const { data: user, isLoading: loading } = useQuery({
-        queryKey: ["user"],
-        queryFn: async () => {
-            const { data } = await axiosPublic.get('/protected');
-            // console.log(data);
-            return data;
-        }
-    })
-    const authInfo = {user, loading}
+const AuthProvider = ({ children }) => {
+
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+    const axiosSecure = useAxiosSecure()
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const { data } = await axiosSecure.get('/protected');
+                // console.log("use auth", data);
+                setUser(data);
+            } catch (error) {
+                setUser(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        checkAuth();
+    }, []);
+
+    const authInfo = { loading, user };
     return (
         <div>
             <AuthContext.Provider value={authInfo}>

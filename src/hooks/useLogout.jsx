@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import useAxiosPublic from './useAxiosPublic';  // Import your Axios hook
 import toast from 'react-hot-toast';
+import useAxiosSecure from './useAxiosSecure';
 
 const useLogout = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
 
     // Create a mutation to call the logout route
-    const { mutate } = useMutation({
+    const { mutateAsync } = useMutation({
         mutationFn: async () => {
-            const { data } = await axiosPublic.post('/logout', {}, { withCredentials: true });
+            const { data } = await axiosSecure.post('/logout', {});
             return data;
         },
         onSuccess: () => {
@@ -21,7 +21,7 @@ const useLogout = () => {
 
 
     const logOut = () => {
-        mutate();
+        mutateAsync();
     };
 
     return { logOut };

@@ -47,7 +47,7 @@ const Signup = () => {
 
         }
         catch (err) {
-            console.log(err.response);
+            // console.log(err.response);
             if (err?.response?.status === 400) {
                 toast.error(err?.response?.data?.message)
             }

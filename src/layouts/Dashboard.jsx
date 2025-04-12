@@ -1,8 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Dashboard/Sidebar';
+import LoadingSpinner from '../components/Shared/LoadingSpinner';
+import useAuth from '../hooks/useAuth';
 
 const Dashboard = () => {
+    const { loading } = useAuth()
+    if (loading) return <LoadingSpinner />
     return (
         <div className='min-h-screen'>
             <Sidebar/>

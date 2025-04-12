@@ -23,17 +23,13 @@ import Bookmark from "../pages/Bookmark/Bookmark";
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <PrivateRoute><Main /></PrivateRoute>,
+        element: <Main />,
         errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
                 element: <Lessons />
             },
-            // {
-            //     path: '/lessons',
-            //     element: <Lessons />
-            // },
             {
                 path: '/lesson/:id',
                 element: <PrivateRoute><LessonDetails /></PrivateRoute>

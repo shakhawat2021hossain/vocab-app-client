@@ -27,7 +27,6 @@ const LessonDetails = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [isComplete, setIsComplete] = useState(false);
     const [showConfetti, setShowConfetti] = useState(false);
-    const [bookmarkWord, setBookmarkWord] = useState(false);
     
     const vocab = lesson?.vocabularies || [];
     // console.log(vocab);

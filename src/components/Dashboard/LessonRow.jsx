@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import React from 'react';
-import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';

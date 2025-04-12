@@ -1,19 +1,20 @@
-import { data, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { ImSpinner9 } from "react-icons/im";
 import PassInput from "../../components/Shared/PassInput";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 const Login = () => {
     const navigate = useNavigate()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
 
 
     const { mutateAsync, isPending } = useMutation({
         mutationFn: async (user) => {
-            const { data } = await axiosPublic.post('/login', user)
+            const { data } = await axiosSecure.post('/login', user, {withCredentials: true})
+            // console.log("login", data);
             return data
         },
         onSuccess: (data) => {

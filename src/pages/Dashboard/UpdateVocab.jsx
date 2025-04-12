@@ -3,7 +3,6 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner';
 
 const UpdateVocab = () => {
@@ -11,17 +10,16 @@ const UpdateVocab = () => {
     // console.log(id, pronunciation);
 
     const navigate = useNavigate()
-    const axiosSecure = useAxiosSecure()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure();
 
     const { data: vocab, isLoading } = useQuery({
         queryKey: ["vocab", id, pronunciation],
         queryFn: async () => {
-            const { data } = await axiosPublic.get(`/vocab/${id}/${pronunciation}`);
+            const { data } = await axiosSecure.get(`/vocab/${id}/${pronunciation}`);
             return data;
         },
     });
-    console.log(vocab);
+    // console.log(vocab);
 
     const { mutateAsync } = useMutation({
         mutationFn: async (vocabulary) => {
