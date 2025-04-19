@@ -8,7 +8,6 @@ import Lessons from "../pages/Lessons/Lessons";
 import LessonDetails from "../pages/LessonDetails/LessonDetails";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard";
-import Statistics from "../pages/Dashboard/Statistics";
 import AddLesson from "../pages/Dashboard/AddLesson";
 import AddVocab from "../pages/Dashboard/AddVocab";
 import ManageUsers from "../pages/Dashboard/ManageUsers";
@@ -26,9 +25,10 @@ export const router = createBrowserRouter([
         element: <Main />,
         errorElement: <ErrorPage />,
         children: [
+
             {
                 index: true,
-                element: <Lessons />
+                element: <Home />
             },
             {
                 path: '/lesson/:id',

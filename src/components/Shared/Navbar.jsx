@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { AiOutlineMenu } from "react-icons/ai";
 import useAuth from '../../hooks/useAuth';
 import useLogout from '../../hooks/useLogOut';
@@ -37,19 +37,19 @@ const Navbar = () => {
                         <div className='relative flex'>
                             <ul className='menu menu-horizontal px-1 font-semibold flex flex-row items-center gap-6 mx-6'>
                                 <li>
-                                    <Link to='/' className='text-dark-100 hover:text-primary-400 transition-colors'>
+                                    <NavLink to='/' className='text-dark-100 hover:text-primary-400 transition-colors'>
                                         Lessons
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to='/tutorials' className='text-dark-100 hover:text-primary-400 transition-colors'>
+                                    <NavLink to='/tutorials' className='text-dark-100 hover:text-primary-400 transition-colors'>
                                         Tutorials
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to='/bookmark' className='text-dark-100 hover:text-primary-400 transition-colors'>
+                                    <NavLink to='/bookmark' className='text-dark-100 hover:text-primary-400 transition-colors'>
                                         <BiBookmark size={22} className="inline-block" />
-                                    </Link>
+                                    </NavLink>
                                 </li>
                             </ul>
 

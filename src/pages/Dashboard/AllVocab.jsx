@@ -85,7 +85,7 @@ const AllVocab = () => {
                             <th className="py-2 px-4 text-left">Meaning</th>
                             <th className="py-2 px-4 text-left">Pronunciation</th>
                             <th className="py-2 px-4 text-left">When to Say</th>
-                            <th className="py-2 px-4 text-left">Lesson No</th>
+                            <th className="py-2 px-4 text-left">Lesson</th>
                             <th className="py-2 px-4 text-center">Actions</th>
                         </tr>
                     </thead>
@@ -101,7 +101,7 @@ const AllVocab = () => {
                                     <td className="py-2 px-4">{vocab.pronunciation}</td>
                                     <td className="py-2 px-4">{vocab.whenToSay}</td>
                                     <td className="py-2 px-4">{lesson.lessonNo}</td>
-                                    <td className="py-2 px-4 text-center space-x-3">
+                                    <td className="py-2 px-4 text-center space-x-2 flex">
                                         <Link
                                             to={`/dashboard/update-vocab/${lesson._id}/${vocab?.pronunciation}`}
                                             className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
