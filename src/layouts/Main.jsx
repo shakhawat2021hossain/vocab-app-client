@@ -9,6 +9,7 @@ import LoadingSpinner from "../components/Shared/LoadingSpinner";
 const Main = () => {
     const { loading } = useAuth()
     if (loading) return <LoadingSpinner />
+
     return (
         <div>
             <Navbar></Navbar>

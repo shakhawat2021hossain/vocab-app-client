@@ -2,22 +2,22 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { AiOutlineMenu } from "react-icons/ai";
 import useAuth from '../../hooks/useAuth';
-import useLogout from '../../hooks/useLogOut';
 import { BiBookmark } from 'react-icons/bi';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const { user } = useAuth()
-    const { logOut } = useLogout()
+    const { user, loading, logout } = useAuth()
+    // console.log(user);
 
     const handleLogout = async () => {
         try {
-            await logOut()
+            await logout()
         }
         catch (err) {
             console.log(err);
         }
     }
+    const isAuthenticated = user?.email;
 
     return (
         <div className='w-full bg-dark-800 shadow-sm border-b border-dark-700'>
@@ -75,7 +75,7 @@ const Navbar = () => {
                             {isOpen && (
                                 <div className='absolute rounded-lg shadow-card-hover bg-dark-750 border border-dark-600 overflow-hidden right-0 top-12 text-sm z-50'>
                                     <div className='flex flex-col cursor-pointer'>
-                                        {user ? (
+                                        { isAuthenticated ? (
                                             <>
                                                 <Link
                                                     to='/dashboard'

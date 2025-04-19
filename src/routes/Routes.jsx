@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home/Home";
-import Signup from "../pages/Signup/Signup";
-import Login from "../pages/Login/Login";
+import Signup from "../pages/Auth/Signup/Signup";
+import Login from "../pages/Auth/Login/Login";
 import Lessons from "../pages/Lessons/Lessons";
 import LessonDetails from "../pages/LessonDetails/LessonDetails";
 import PrivateRoute from "./PrivateRoute";
@@ -18,6 +18,8 @@ import AllVocab from "../pages/Dashboard/AllVocab";
 import UpdateVocab from "../pages/Dashboard/UpdateVocab";
 import Tutorials from "../pages/Tutorials/Tutorials";
 import Bookmark from "../pages/Bookmark/Bookmark";
+import ForgotPass from "../pages/Auth/ForgotPass";
+import ResetPass from "../pages/Auth/ResetPass";
 
 export const router = createBrowserRouter([
     {
@@ -51,6 +53,14 @@ export const router = createBrowserRouter([
     {
         path: '/login',
         element: <Login />
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPass />
+    },
+    {
+        path: '/reset-password/:token',
+        element: <ResetPass/>
     },
     {
         path: '/dashboard',

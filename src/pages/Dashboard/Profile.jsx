@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import LoadingSpinner from "../../components/Shared/LoadingSpinner"
 import useAuth from "../../hooks/useAuth"
 import useRole from "../../hooks/useRole"
@@ -50,7 +51,7 @@ const Profile = () => {
                                     Update Profile
                                 </button>
                                 <button className='bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]'>
-                                    Change Password
+                                    <Link to="/forgot-password">Update Password</Link>
                                 </button>
                             </div>
                         </div>
